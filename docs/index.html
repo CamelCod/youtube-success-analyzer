@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎯 YouTube Success Analyzer - Transform Channels into Insights</title>
+    <meta name="description" content="Comprehensive YouTube channel analysis tool with AI-powered insights, performance metrics, and NotebookLM prompts">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .gradient-bg {
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+        .glass {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen py-8 px-4">
+    <div class="max-w-6xl mx-auto">
+        <!-- Header -->
+        <div class="glass rounded-3xl shadow-2xl p-8 mb-8 fade-in">
+            <div class="text-center">
+                <h1 class="text-5xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                    🎯 YouTube Success Analyzer
+                </h1>
+                <p class="text-xl text-gray-700 mb-6">
+                    Transform any YouTube channel into actionable insights
+                </p>
+                <div class="flex flex-wrap justify-center gap-6 mb-6">
+                    <a href="https://github.com/CamelCod/youtube-success-analyzer" target="_blank" class="inline-flex items-center gap-2 bg-gray-900 text-white px-6 py-3 rounded-xl hover:bg-gray-800 transition-all shadow-lg">
+                        <i class="fab fa-github text-xl"></i>
+                        <span>View on GitHub</span>
+                    </a>
+                    <a href="https://github.com/CamelCod/youtube-success-analyzer/archive/refs/heads/master.zip" class="inline-flex items-center gap-2 bg-green-600 text-white px-6 py-3 rounded-xl hover:bg-green-700 transition-all shadow-lg">
+                        <i class="fas fa-download text-xl"></i>
+                        <span>Download Tool</span>
+                    </a>
+                    <a href="#deploy" class="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-xl hover:bg-blue-700 transition-all shadow-lg">
+                        <i class="fas fa-rocket text-xl"></i>
+                        <span>Deploy Your Own</span>
+                    </a>
+                </div>
+                <div class="flex flex-wrap justify-center gap-4 text-sm text-gray-600">
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-chart-line text-blue-500"></i>
+                        <span>Performance Analytics</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-robot text-purple-500"></i>
+                        <span>AI-Powered Insights</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-file-export text-green-500"></i>
+                        <span>Export Ready Data</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-lightbulb text-yellow-500"></i>
+                        <span>NotebookLM Prompts</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Demo Video/Screenshot Section -->
+        <div class="glass rounded-3xl shadow-2xl p-8 mb-8 fade-in">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">
+                <i class="fas fa-play-circle text-red-500"></i>
+                See It In Action
+            </h2>
+            <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 text-center">
+                <div class="text-white mb-4">
+                    <i class="fas fa-desktop text-6xl mb-4 opacity-50"></i>
+                    <p class="text-lg">Demo Screenshot Coming Soon</p>
+                    <p class="text-sm opacity-75 mt-2">Download the tool to see the full interface in action!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Grid -->
+        <div class="glass rounded-3xl shadow-2xl p-8 mb-8 fade-in">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">
+                What You'll Get
+            </h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-6 border border-blue-200">
+                    <div class="text-4xl mb-4">📊</div>
+                    <h3 class="font-bold text-gray-800 mb-2 text-lg">Channel Statistics</h3>
+                    <p class="text-sm text-gray-600">Complete metrics: views, engagement, performance rankings, and success patterns.</p>
+                </div>
+                <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-6 border border-purple-200">
+                    <div class="text-4xl mb-4">🎯</div>
+                    <h3 class="font-bold text-gray-800 mb-2 text-lg">Success Metrics</h3>
+                    <p class="text-sm text-gray-600">Top 20 performers, engagement analysis, and high-performer characteristics.</p>
+                </div>
+                <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-6 border border-green-200">
+                    <div class="text-4xl mb-4">🏷️</div>
+                    <h3 class="font-bold text-gray-800 mb-2 text-lg">Content Themes</h3>
+                    <p class="text-sm text-gray-600">Topic analysis, tag frequency, and content category breakdown.</p>
+                </div>
+                <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-xl p-6 border border-yellow-200">
+                    <div class="text-4xl mb-4">🤖</div>
+                    <h3 class="font-bold text-gray-800 mb-2 text-lg">AI Analysis Prompts</h3>
+                    <p class="text-sm text-gray-600">5 specialized NotebookLM prompts for deep content strategy insights.</p>
+                </div>
+                <div class="bg-gradient-to-br from-red-50 to-red-100 rounded-xl p-6 border border-red-200">
+                    <div class="text-4xl mb-4">💼</div>
+                    <h3 class="font-bold text-gray-800 mb-2 text-lg">CSV Exports</h3>
+                    <p class="text-sm text-gray-600">Complete dataset for Excel/Sheets analysis and custom reporting.</p>
+                </div>
+                <div class="bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-xl p-6 border border-indigo-200">
+                    <div class="text-4xl mb-4">📋</div>
+                    <h3 class="font-bold text-gray-800 mb-2 text-lg">Markdown Reports</h3>
+                    <p class="text-sm text-gray-600">Professional reports ready to share with your team.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Start -->
+        <div class="glass rounded-3xl shadow-2xl p-8 mb-8 fade-in">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">
+                <i class="fas fa-rocket text-blue-500"></i>
+                Quick Start Guide
+            </h2>
+            <div class="space-y-6">
+                <div class="flex gap-4">
+                    <div class="flex-shrink-0 w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-xl">
+                        1
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-gray-800 mb-2">Clone or Download</h3>
+                        <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm"><code>git clone https://github.com/CamelCod/youtube-success-analyzer.git
+cd youtube-success-analyzer</code></pre>
+                    </div>
+                </div>
+                <div class="flex gap-4">
+                    <div class="flex-shrink-0 w-12 h-12 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold text-xl">
+                        2
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-gray-800 mb-2">Install Dependencies</h3>
+                        <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm"><code>pip install -r requirements.txt</code></pre>
+                    </div>
+                </div>
+                <div class="flex gap-4">
+                    <div class="flex-shrink-0 w-12 h-12 bg-green-600 text-white rounded-full flex items-center justify-center font-bold text-xl">
+                        3
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-gray-800 mb-2">Run the Tool</h3>
+                        <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm"><code># Web Interface (Recommended)
+python app.py
+# Then open: http://localhost:5000
+
+# Or Command Line
+python youtube_success_analyzer.py</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Deploy Section -->
+        <div id="deploy" class="glass rounded-3xl shadow-2xl p-8 mb-8 fade-in">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">
+                <i class="fas fa-cloud text-blue-500"></i>
+                Deploy Your Own Instance
+            </h2>
+            <p class="text-center text-gray-600 mb-8">
+                Host the full working app for free on these platforms:
+            </p>
+            <div class="grid md:grid-cols-3 gap-6">
+                <a href="https://render.com/deploy" target="_blank" class="block bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-6 border-2 border-purple-200 hover:border-purple-400 transition-all">
+                    <div class="text-3xl mb-3">🚀</div>
+                    <h3 class="font-bold text-gray-800 mb-2">Render</h3>
+                    <p class="text-sm text-gray-600 mb-3">Free tier available, automatic deployments</p>
+                    <span class="text-purple-600 text-sm font-semibold">Deploy to Render →</span>
+                </a>
+                <a href="https://railway.app/new" target="_blank" class="block bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-6 border-2 border-blue-200 hover:border-blue-400 transition-all">
+                    <div class="text-3xl mb-3">🚂</div>
+                    <h3 class="font-bold text-gray-800 mb-2">Railway</h3>
+                    <p class="text-sm text-gray-600 mb-3">$5 free credit monthly, easy setup</p>
+                    <span class="text-blue-600 text-sm font-semibold">Deploy to Railway →</span>
+                </a>
+                <a href="https://vercel.com/new" target="_blank" class="block bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-6 border-2 border-green-200 hover:border-green-400 transition-all">
+                    <div class="text-3xl mb-3">▲</div>
+                    <h3 class="font-bold text-gray-800 mb-2">Vercel</h3>
+                    <p class="text-sm text-gray-600 mb-3">Free for hobby projects, instant deployments</p>
+                    <span class="text-green-600 text-sm font-semibold">Deploy to Vercel →</span>
+                </a>
+            </div>
+            <div class="mt-8 bg-yellow-50 border border-yellow-200 rounded-xl p-6">
+                <p class="text-sm text-gray-700">
+                    <i class="fas fa-info-circle text-yellow-600 mr-2"></i>
+                    <strong>Note:</strong> Deployment guide coming soon! For now, download and run locally for the best experience.
+                </p>
+            </div>
+        </div>
+
+        <!-- Use Cases -->
+        <div class="glass rounded-3xl shadow-2xl p-8 mb-8 fade-in">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">
+                Perfect For
+            </h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-xl p-6 border border-gray-200">
+                    <div class="text-3xl mb-3">👨‍💼</div>
+                    <h3 class="font-bold text-gray-800 mb-2">Content Creators</h3>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>✓ Study successful channels in your niche</li>
+                        <li>✓ Build data-driven content calendars</li>
+                        <li>✓ Optimize engagement strategies</li>
+                        <li>✓ Identify viral content patterns</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-xl p-6 border border-gray-200">
+                    <div class="text-3xl mb-3">📊</div>
+                    <h3 class="font-bold text-gray-800 mb-2">Marketing Teams</h3>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>✓ Analyze competitor strategies</li>
+                        <li>✓ Evaluate influencer partnerships</li>
+                        <li>✓ Plan data-driven campaigns</li>
+                        <li>✓ Understand audience preferences</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-xl p-6 border border-gray-200">
+                    <div class="text-3xl mb-3">💼</div>
+                    <h3 class="font-bold text-gray-800 mb-2">Business Strategists</h3>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>✓ Identify monetization opportunities</li>
+                        <li>✓ Market research and trends</li>
+                        <li>✓ Find collaboration opportunities</li>
+                        <li>✓ Revenue modeling</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-xl p-6 border border-gray-200">
+                    <div class="text-3xl mb-3">🔬</div>
+                    <h3 class="font-bold text-gray-800 mb-2">Researchers</h3>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>✓ Study viral content patterns</li>
+                        <li>✓ Analyze engagement metrics</li>
+                        <li>✓ Track content trends</li>
+                        <li>✓ Export data for analysis</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="glass rounded-3xl shadow-2xl p-8 mb-8 fade-in">
+            <div class="grid md:grid-cols-4 gap-6 text-center">
+                <div>
+                    <div class="text-4xl font-bold text-blue-600 mb-2">100+</div>
+                    <div class="text-sm text-gray-600">Videos Analyzed</div>
+                </div>
+                <div>
+                    <div class="text-4xl font-bold text-purple-600 mb-2">8</div>
+                    <div class="text-sm text-gray-600">Report Types</div>
+                </div>
+                <div>
+                    <div class="text-4xl font-bold text-green-600 mb-2">5</div>
+                    <div class="text-sm text-gray-600">AI Prompts</div>
+                </div>
+                <div>
+                    <div class="text-4xl font-bold text-yellow-600 mb-2">∞</div>
+                    <div class="text-sm text-gray-600">Channels to Analyze</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center text-white">
+            <p class="text-sm opacity-80 mb-4">
+                Built with ❤️ for content creators, marketers, and strategists
+            </p>
+            <div class="flex justify-center gap-6 mb-4">
+                <a href="https://github.com/CamelCod/youtube-success-analyzer" target="_blank" class="opacity-80 hover:opacity-100 transition-all">
+                    <i class="fab fa-github text-2xl"></i>
+                </a>
+                <a href="https://github.com/CamelCod/youtube-success-analyzer/issues" target="_blank" class="opacity-80 hover:opacity-100 transition-all">
+                    <i class="fas fa-bug text-2xl"></i>
+                </a>
+                <a href="https://github.com/CamelCod/youtube-success-analyzer/stargazers" target="_blank" class="opacity-80 hover:opacity-100 transition-all">
+                    <i class="fas fa-star text-2xl"></i>
+                </a>
+            </div>
+            <p class="text-xs opacity-60">
+                © 2025 YouTube Success Analyzer • Open Source MIT License
+            </p>
+        </div>
+    </div>
+</body>
+</html>

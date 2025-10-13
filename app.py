@@ -106,12 +106,21 @@ def open_folder():
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
-    print("="*80)
-    print("🎯 YouTube Success Analyzer - Web Interface")
-    print("="*80)
-    print("\n🌐 Starting web server...")
-    print(f"📍 Open your browser to: http://localhost:5000")
-    print("\n💡 Press Ctrl+C to stop the server\n")
-    print("="*80)
+    import os
     
-    app.run(debug=True, port=5000, threaded=True)
+    # Get port from environment variable or default to 5000
+    port = int(os.environ.get('PORT', 5000))
+    
+    # Check if running in production
+    is_production = os.environ.get('RENDER') or os.environ.get('RAILWAY_ENVIRONMENT')
+    
+    if not is_production:
+        print("="*80)
+        print("🎯 YouTube Success Analyzer - Web Interface")
+        print("="*80)
+        print("\n🌐 Starting web server...")
+        print(f"📍 Open your browser to: http://localhost:{port}")
+        print("\n💡 Press Ctrl+C to stop the server\n")
+        print("="*80)
+    
+    app.run(debug=not is_production, host='0.0.0.0', port=port, threaded=True)
