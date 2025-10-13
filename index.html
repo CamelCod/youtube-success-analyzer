@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎯 YouTube Success Analyzer - Web Interface</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .gradient-bg {
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+        .glass {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: #3b82f6;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .pulse-ring {
+            animation: pulse-ring 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+        }
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); opacity: 1; }
+            50% { transform: scale(1); opacity: 0.7; }
+            100% { transform: scale(0.95); opacity: 1; }
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen py-8 px-4">
+    <div class="max-w-6xl mx-auto">
+        <!-- Header -->
+        <div class="glass rounded-3xl shadow-2xl p-8 mb-8 fade-in">
+            <div class="text-center">
+                <h1 class="text-5xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                    🎯 YouTube Success Analyzer
+                </h1>
+                <p class="text-xl text-gray-700 mb-6">
+                    Transform any YouTube channel into actionable insights
+                </p>
+                <div class="flex flex-wrap justify-center gap-4 text-sm text-gray-600">
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-chart-line text-blue-500"></i>
+                        <span>Performance Analytics</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-robot text-purple-500"></i>
+                        <span>AI-Powered Insights</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-file-export text-green-500"></i>
+                        <span>Export Ready Data</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-lightbulb text-yellow-500"></i>
+                        <span>NotebookLM Prompts</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Input Card -->
+        <div class="glass rounded-3xl shadow-2xl p-8 mb-8 fade-in">
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-3">
+                    <i class="fas fa-play-circle text-red-500"></i>
+                    Analyze a YouTube Channel
+                </h2>
+                <p class="text-gray-600 mb-6">
+                    Enter any YouTube channel URL to get comprehensive success insights, performance metrics, and AI-powered analysis prompts.
+                </p>
+                
+                <!-- URL Input -->
+                <div class="mb-4">
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">
+                        YouTube Channel URL
+                    </label>
+                    <div class="relative">
+                        <input 
+                            type="text" 
+                            id="channelUrl" 
+                            placeholder="https://www.youtube.com/@channelname"
+                            class="w-full px-4 py-3 pr-12 border-2 border-gray-300 rounded-xl focus:ring-4 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                        />
+                        <i class="fas fa-link absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-2">
+                        Supported formats: @channelname, /c/channel, /channel/UC...
+                    </p>
+                </div>
+
+                <!-- Run Button -->
+                <button 
+                    id="analyzeBtn"
+                    onclick="runAnalysis()"
+                    class="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold py-4 px-6 rounded-xl hover:from-blue-600 hover:to-purple-700 transform hover:scale-[1.02] transition-all shadow-lg flex items-center justify-center gap-3"
+                >
+                    <i class="fas fa-rocket text-xl"></i>
+                    <span>Start Analysis</span>
+                </button>
+            </div>
+
+            <!-- Example URLs -->
+            <div class="bg-blue-50 rounded-xl p-4 border border-blue-200">
+                <p class="text-sm font-semibold text-blue-800 mb-2">
+                    <i class="fas fa-info-circle"></i> Try these examples:
+                </p>
+                <div class="flex flex-wrap gap-2">
+                    <button onclick="fillExample('https://www.youtube.com/@MKBHD')" class="text-xs bg-white px-3 py-1 rounded-lg hover:bg-blue-100 transition-all border border-blue-200">
+                        @MKBHD
+                    </button>
+                    <button onclick="fillExample('https://www.youtube.com/@MrBeast')" class="text-xs bg-white px-3 py-1 rounded-lg hover:bg-blue-100 transition-all border border-blue-200">
+                        @MrBeast
+                    </button>
+                    <button onclick="fillExample('https://www.youtube.com/@veritasium')" class="text-xs bg-white px-3 py-1 rounded-lg hover:bg-blue-100 transition-all border border-blue-200">
+                        @veritasium
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Output Section -->
+        <div id="outputSection" class="hidden glass rounded-3xl shadow-2xl p-8 fade-in">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-3">
+                <i class="fas fa-terminal text-green-500"></i>
+                Analysis Progress
+            </h2>
+            
+            <!-- Status Display -->
+            <div id="statusDisplay" class="bg-gray-900 rounded-xl p-6 mb-6 font-mono text-sm overflow-auto max-h-96">
+                <div class="text-green-400">
+                    <span class="animate-pulse">▶</span> Initializing analyzer...
+                </div>
+            </div>
+
+            <!-- Progress Indicator -->
+            <div id="progressIndicator" class="mb-6">
+                <div class="flex justify-between text-sm text-gray-600 mb-2">
+                    <span>Processing...</span>
+                    <span id="progressText">0%</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+                    <div id="progressBar" class="bg-gradient-to-r from-blue-500 to-purple-600 h-3 rounded-full transition-all duration-500" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <!-- Results Summary -->
+            <div id="resultsSummary" class="hidden space-y-4">
+                <div class="bg-green-50 border border-green-200 rounded-xl p-4">
+                    <h3 class="font-bold text-green-800 mb-2 flex items-center gap-2">
+                        <i class="fas fa-check-circle"></i>
+                        Analysis Complete!
+                    </h3>
+                    <p class="text-green-700 text-sm mb-4" id="summaryText">
+                        Your comprehensive analysis is ready.
+                    </p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
+                        <div class="bg-white rounded-lg p-3 text-center">
+                            <div class="text-2xl font-bold text-blue-600" id="videoCount">0</div>
+                            <div class="text-xs text-gray-600">Videos Analyzed</div>
+                        </div>
+                        <div class="bg-white rounded-lg p-3 text-center">
+                            <div class="text-2xl font-bold text-purple-600" id="totalViews">0</div>
+                            <div class="text-xs text-gray-600">Total Views</div>
+                        </div>
+                        <div class="bg-white rounded-lg p-3 text-center">
+                            <div class="text-2xl font-bold text-green-600" id="reportCount">8</div>
+                            <div class="text-xs text-gray-600">Reports Generated</div>
+                        </div>
+                        <div class="bg-white rounded-lg p-3 text-center">
+                            <div class="text-2xl font-bold text-yellow-600" id="promptCount">5</div>
+                            <div class="text-xs text-gray-600">AI Prompts</div>
+                        </div>
+                    </div>
+                    <button onclick="openOutputFolder()" class="w-full bg-green-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-green-700 transition-all flex items-center justify-center gap-2">
+                        <i class="fas fa-folder-open"></i>
+                        Open Analysis Folder
+                    </button>
+                </div>
+
+                <!-- Generated Files List -->
+                <div class="bg-white rounded-xl p-6 border border-gray-200">
+                    <h3 class="font-bold text-gray-800 mb-4 flex items-center gap-2">
+                        <i class="fas fa-file-alt"></i>
+                        Generated Files
+                    </h3>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex items-center gap-3 p-2 hover:bg-gray-50 rounded">
+                            <i class="fas fa-file-alt text-blue-500"></i>
+                            <span class="font-mono text-gray-700">00_MASTER_SUMMARY.md</span>
+                            <span class="text-xs text-gray-500 ml-auto">Start Here</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-2 hover:bg-gray-50 rounded">
+                            <i class="fas fa-chart-bar text-green-500"></i>
+                            <span class="font-mono text-gray-700">01_channel_statistics.md</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-2 hover:bg-gray-50 rounded">
+                            <i class="fas fa-trophy text-yellow-500"></i>
+                            <span class="font-mono text-gray-700">02_success_metrics.md</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-2 hover:bg-gray-50 rounded">
+                            <i class="fas fa-tags text-purple-500"></i>
+                            <span class="font-mono text-gray-700">03_content_themes.md</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-2 hover:bg-gray-50 rounded">
+                            <i class="fas fa-list-ol text-red-500"></i>
+                            <span class="font-mono text-gray-700">04_performance_rankings.md</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-2 hover:bg-gray-50 rounded">
+                            <i class="fas fa-file-csv text-green-600"></i>
+                            <span class="font-mono text-gray-700">detailed_video_data.csv</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-2 hover:bg-gray-50 rounded">
+                            <i class="fas fa-folder text-orange-500"></i>
+                            <span class="font-mono text-gray-700">notebooklm_prompts/</span>
+                            <span class="text-xs text-gray-500 ml-auto">5 prompts</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="glass rounded-3xl shadow-2xl p-8 mt-8 fade-in">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+                What You'll Get
+            </h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-6 border border-blue-200">
+                    <div class="text-4xl mb-4">📊</div>
+                    <h3 class="font-bold text-gray-800 mb-2">Performance Analytics</h3>
+                    <p class="text-sm text-gray-600">Comprehensive statistics, engagement metrics, and success patterns from all videos.</p>
+                </div>
+                <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-6 border border-purple-200">
+                    <div class="text-4xl mb-4">🤖</div>
+                    <h3 class="font-bold text-gray-800 mb-2">AI Analysis Prompts</h3>
+                    <p class="text-sm text-gray-600">5 specialized NotebookLM prompts for deep content strategy insights.</p>
+                </div>
+                <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-6 border border-green-200">
+                    <div class="text-4xl mb-4">💼</div>
+                    <h3 class="font-bold text-gray-800 mb-2">Export Ready Data</h3>
+                    <p class="text-sm text-gray-600">CSV exports and markdown reports for business intelligence and strategy.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center mt-8 text-white">
+            <p class="text-sm opacity-80">
+                Built with ❤️ using YouTube Success Analyzer
+            </p>
+            <p class="text-xs opacity-60 mt-2">
+                Perfect for content creators, marketers, and business strategists
+            </p>
+        </div>
+    </div>
+
+    <script>
+        let analysisProcess = null;
+        let outputPath = '';
+
+        function fillExample(url) {
+            document.getElementById('channelUrl').value = url;
+        }
+
+        async function runAnalysis() {
+            const channelUrl = document.getElementById('channelUrl').value.trim();
+            
+            if (!channelUrl) {
+                alert('⚠️ Please enter a YouTube channel URL');
+                return;
+            }
+
+            // Validate URL format
+            if (!channelUrl.includes('youtube.com')) {
+                alert('⚠️ Please enter a valid YouTube channel URL');
+                return;
+            }
+
+            // Show output section
+            document.getElementById('outputSection').classList.remove('hidden');
+            document.getElementById('resultsSummary').classList.add('hidden');
+            document.getElementById('statusDisplay').innerHTML = '<div class="text-green-400"><span class="animate-pulse">▶</span> Initializing analyzer...</div>';
+            document.getElementById('progressBar').style.width = '0%';
+            document.getElementById('progressText').textContent = '0%';
+
+            // Disable button
+            const btn = document.getElementById('analyzeBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span>Running Analysis...</span>';
+            btn.classList.add('opacity-75', 'cursor-not-allowed');
+
+            // Scroll to output
+            document.getElementById('outputSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+            try {
+                // Call Python script via backend
+                const response = await fetch('/api/analyze', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ channelUrl })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Analysis failed');
+                }
+
+                // Stream the response
+                const reader = response.body.getReader();
+                const decoder = new TextDecoder();
+                let buffer = '';
+
+                while (true) {
+                    const { done, value } = await reader.read();
+                    if (done) break;
+
+                    buffer += decoder.decode(value, { stream: true });
+                    const lines = buffer.split('\n');
+                    buffer = lines.pop();
+
+                    for (const line of lines) {
+                        if (line.startsWith('data: ')) {
+                            const data = JSON.parse(line.slice(6));
+                            updateProgress(data);
+                        }
+                    }
+                }
+
+                // Show completion
+                showResults();
+
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('statusDisplay').innerHTML += 
+                    '<div class="text-red-400 mt-2"><i class="fas fa-exclamation-triangle"></i> Error: ' + error.message + '</div>' +
+                    '<div class="text-yellow-400 mt-2">💡 Make sure the Python backend is running: python app.py</div>';
+            } finally {
+                // Re-enable button
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-rocket text-xl"></i> <span>Start Analysis</span>';
+                btn.classList.remove('opacity-75', 'cursor-not-allowed');
+            }
+        }
+
+        function updateProgress(data) {
+            const statusDisplay = document.getElementById('statusDisplay');
+            
+            if (data.type === 'log') {
+                statusDisplay.innerHTML += `<div class="text-gray-300 mt-1">${data.message}</div>`;
+                statusDisplay.scrollTop = statusDisplay.scrollHeight;
+            } else if (data.type === 'progress') {
+                document.getElementById('progressBar').style.width = data.percent + '%';
+                document.getElementById('progressText').textContent = data.percent + '%';
+            } else if (data.type === 'complete') {
+                outputPath = data.outputPath;
+                document.getElementById('videoCount').textContent = data.stats.videoCount || '0';
+                document.getElementById('totalViews').textContent = data.stats.totalViews || '0';
+            }
+        }
+
+        function showResults() {
+            document.getElementById('resultsSummary').classList.remove('hidden');
+            document.getElementById('progressIndicator').classList.add('hidden');
+            
+            // Scroll to results
+            setTimeout(() => {
+                document.getElementById('resultsSummary').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }, 300);
+        }
+
+        function openOutputFolder() {
+            if (outputPath) {
+                fetch('/api/open-folder', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ path: outputPath })
+                });
+            } else {
+                alert('⚠️ Output path not found. Check the analysis folder in your project directory.');
+            }
+        }
+
+        // Add keyboard shortcut
+        document.getElementById('channelUrl').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                runAnalysis();
+            }
+        });
+    </script>
+</body>
+</html>
