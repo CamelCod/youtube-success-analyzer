@@ -39,168 +39,84 @@ class YouTubeSuccessAnalyzer:
         self.output_dir = Path(".")  # Initialize with current directory
         self.video_data = []
         
-        # Analysis templates for different purposes
-        self.prompt_templates = {
-            "success_analysis": """
-# YouTube Success Analysis
+        # Master Prompt Template - Consolidated approach for efficiency
+        self.master_prompt_template = """
+# Master YouTube Strategy & Content Generation Prompt
 
-Analyze these {video_count} videos from {channel_name} to identify success patterns:
+**Source Analysis**: {video_count} videos from the {channel_name} channel.
 
-## Success Metrics Analysis
-- Which videos have the highest view counts and why?
-- What engagement patterns (likes, comments) indicate success?
-- How does video duration correlate with performance?
-- What upload timing patterns show the best results?
+## Part 1: Unified Success Pattern Analysis
 
-## Content Strategy Insights  
-- What topics and themes generate the most views?
-- Which video titles and thumbnails drive engagement?
-- How does the channel maintain audience retention?
-- What content formats work best for this channel?
+Analyze the provided video sources to identify the core components of {channel_name}'s success. Focus only on patterns observable from public data (titles, transcripts, topics, view counts, etc.).
 
-## Competitive Advantages
-- What unique approaches does this channel use?
-- How does their content differ from competitors?
-- What makes their most successful videos stand out?
-- What audience needs are they fulfilling better than others?
+### Content Pillars & Viral Triggers
+- What are the 3-5 main content themes?
+- Which specific topics or formats consistently outperform the channel's average view count?
+- What common elements (e.g., pacing, specific keywords, high-stakes titles) do the top 10% of videos share?
+- What title patterns and hooks appear most frequently in high-performing videos?
 
-## Replication Strategy
-- What patterns can be applied to other channels?
-- Which success factors are channel-specific vs universal?
-- How can these insights inform content creation?
-- What would a content calendar based on these patterns look like?
+### Audience & Formatting  
+- Based on the language and topics, who is the target audience?
+- What is the most common video length, and how does it correlate with performance?
+- How do their titles work to hook the viewer immediately?
+- What content formats (tutorials, news, commentary, etc.) perform best?
 
-Focus on actionable insights backed by the video data provided.
-""",
-            
-            "content_strategy": """
-# Content Strategy Deep Dive
+### Unique Value Proposition
+- What makes their content difficult for a competitor to copy?
+- What market gap are they filling better than anyone else?
+- What unique angles, expertise, or presentation style sets them apart?
+- How do they differentiate from similar channels in their niche?
 
-Using the {video_count} videos from {channel_name}, create a comprehensive content strategy analysis:
+### Monetization Potential  
+- Which video topics demonstrate a high level of expertise that would build trust for a paid product?
+- What content could naturally lead to courses, consulting, or premium offerings?
+- Which videos show strong audience loyalty and engagement that indicates monetization potential?
 
-## Content Pillars & Themes
-- Identify the main content categories and themes
-- Analyze how different topics perform in terms of views and engagement
-- Map the content mix and posting patterns
-- Identify content gaps and opportunities
+---
 
-## Audience Analysis
-- Who is the target audience based on content style and topics?
-- What audience problems and desires are being addressed?
-- How does the channel build community and engagement?
-- What audience retention strategies are employed?
+## Part 2: Actionable Content Generation
 
-## Performance Patterns
-- Which content types generate the most views?
-- What video lengths perform best?
-- Are there seasonal or timing patterns in success?
-- How do thumbnails and titles impact performance?
+Based on your entire analysis in Part 1, your primary task is to **generate 5 distinct video ideas** that replicate the success patterns you identified.
 
-## Scaling Opportunities
-- What content could be expanded into series?
-- Which successful formats could be replicated?
-- How could this strategy be adapted for different niches?
-- What would a growth-focused content calendar look like?
+For **each** of the 5 video ideas, provide the following four elements:
 
-Provide specific examples from the video data to support your analysis.
-""",
+### Video Idea #1
+1. **Viral-Optimized Title**: [Create a title that follows {channel_name}'s successful formula]
+2. **Compelling Hook**: [Write the first 1-2 sentences of the video script to grab immediate attention]
+3. **Key Talking Points**: 
+   - [Essential point 1]
+   - [Essential point 2]
+   - [Essential point 3]
+   - [Essential point 4]
+   - [Essential point 5]
+4. **Strategic Rationale**: [In one sentence, explain WHY this video idea is strong based on your analysis]
 
-            "monetization_analysis": """
-# Monetization & Business Model Analysis
+### Video Idea #2
+[Repeat the same 4-element structure]
 
-Analyze the {video_count} videos from {channel_name} for monetization strategies:
+### Video Idea #3
+[Repeat the same 4-element structure]
 
-## Revenue Indicators
-- Which videos likely generate the most ad revenue based on views/length?
-- What content types have the highest commercial potential?
-- Are there patterns in high-performing videos that suggest sponsorship opportunities?
-- How does engagement rate correlate with monetization potential?
+### Video Idea #4
+[Repeat the same 4-element structure]
 
-## Business Model Insights
-- What products or services could this channel naturally promote?
-- Which videos demonstrate thought leadership or expertise that builds trust?
-- How does the channel establish authority in their niche?
-- What affiliate marketing opportunities are evident?
+### Video Idea #5
+[Repeat the same 4-element structure]
 
-## Audience Value
-- What problems does this channel solve for viewers?
-- How does the content provide entertainment, education, or inspiration?
-- What would viewers pay for (courses, coaching, products)?
-- How loyal and engaged is the audience based on metrics?
+---
 
-## Scaling Strategies
-- How could this content strategy be packaged into paid offerings?
-- What would a premium content tier look like?
-- Which successful elements could be franchised or templated?
-- How could this approach be applied to other profitable niches?
+## Part 3: Implementation Roadmap
 
-Include specific data points and examples from the video analysis.
-""",
+Provide a prioritized action plan:
 
-            "competitor_analysis": """
-# Competitive Intelligence Report
+1. **Immediate Actions** (This Week): Which of the 5 video ideas should be created first and why?
+2. **Content Calendar** (Next 30 Days): Suggest an optimal posting schedule for the 5 videos
+3. **Success Metrics**: What metrics should be tracked to validate these strategies?
+4. **Iteration Strategy**: How should the approach be refined based on initial performance?
 
-Using {channel_name}'s {video_count} videos, analyze their competitive position:
-
-## Market Positioning
-- How does this channel differentiate from others in the space?
-- What unique value proposition do they offer?
-- Which market gaps are they filling effectively?
-- How do their metrics compare to typical performance in this niche?
-
-## Success Factors
-- What are their key competitive advantages?
-- Which content approaches are working better than industry standard?
-- How do they handle trending topics vs evergreen content?
-- What innovation or unique angles do they bring?
-
-## Vulnerability Analysis
-- What could competitors copy or improve upon?
-- Which content areas might be underserved?
-- Are there format or topic opportunities they're missing?
-- What would it take for a competitor to surpass them?
-
-## Strategic Recommendations
-- How could other creators learn from their approach?
-- What elements are transferable to other niches?
-- Which strategies require specific expertise or resources?
-- How could this competitive intelligence inform new channel development?
-
-Base your analysis on concrete data from their video performance.
-""",
-
-            "viral_content_analysis": """
-# Viral Content & Growth Pattern Analysis
-
-Examine the {video_count} videos from {channel_name} to understand viral growth:
-
-## High-Performance Content
-- Which videos significantly outperformed the channel average?
-- What common elements do the top 10% of videos share?
-- How do viral videos differ in topic, format, or timing?
-- What triggers seem to drive exceptional engagement?
-
-## Growth Catalysts  
-- Which videos drove subscriber growth vs just views?
-- How do comments and shares correlate with viral potential?
-- What role do thumbnails and titles play in viral success?
-- Are there external factors (trends, events) that boosted performance?
-
-## Replication Framework
-- What viral elements can be systematically replicated?
-- Which aspects are timing/luck vs strategic choices?
-- How could these viral patterns be adapted for other topics?
-- What would a "viral-optimized" content strategy look like?
-
-## Scaling Insights
-- How could viral successes be turned into series or follow-ups?
-- What would maximize the impact of future viral hits?
-- How could viral content drive business outcomes beyond views?
-- What systems would help consistently create viral-worthy content?
-
-Focus on actionable patterns that can inform future content creation.
+Focus on creating video ideas that are immediately actionable and backed by data-driven insights from {channel_name}'s success patterns.
 """
-        }
+    
     
     def display_banner(self):
         """Display the tool banner and introduction."""
@@ -220,7 +136,7 @@ Focus on actionable patterns that can inform future content creation.
         print("   📊 Complete channel performance breakdown")
         print("   💎 Success patterns & viral content insights")
         print("   📈 Top 20 highest-performing videos analysis")
-        print("   🎯 5 AI-powered NotebookLM analysis prompts")
+        print("   🎯 Master AI prompt for instant video idea generation")
         print("   💼 CSV data export for business intelligence")
         print()
         print("💡 Perfect for: Content Creators • Marketers • Business Owners • Researchers")
@@ -331,6 +247,11 @@ Focus on actionable patterns that can inform future content creation.
             'writesubtitles': False,
             'writeautomaticsub': False,
             'ignoreerrors': True,
+            'cookielessapi': True,
+            'proxy': '',
+            'sleep_interval': 1,  # Sleep 1 second between requests
+            'max_sleep_interval': 3,  # Max 3 seconds sleep
+            'sleep_interval_requests': 1,  # Sleep between API requests
         }
         
         try:
@@ -676,10 +597,10 @@ This CSV contains all metadata for further analysis in Excel, Google Sheets, or 
             f.write(content)
     
     def generate_notebooklm_prompts(self):
-        """Generate NotebookLM analysis prompts."""
-        print("\n📝 STEP 4: Creating AI-Powered Analysis Prompts")
+        """Generate the Master NotebookLM analysis prompt."""
+        print("\n📝 STEP 4: Creating AI-Powered Master Analysis Prompt")
         print("="*80)
-        print("   🤖 Generating 5 specialized NotebookLM prompts...")
+        print("   🤖 Generating consolidated Master Prompt (Analysis → Content Ideas)...")
         
         # Create URL list for NotebookLM
         url_file = self.output_dir / "video_urls_for_notebooklm.txt"
@@ -690,52 +611,100 @@ This CSV contains all metadata for further analysis in Excel, Google Sheets, or 
             for video in self.video_data:
                 f.write(f"{video['url']}\n")
         
-        # Generate different analysis prompts
-        prompts_dir = self.output_dir / "notebooklm_prompts"
-        prompts_dir.mkdir(exist_ok=True)
+        # Format the master prompt with channel data
+        formatted_prompt = self.master_prompt_template.format(
+            channel_name=self.channel_name,
+            video_count=len(self.video_data)
+        )
         
-        for prompt_type, template in self.prompt_templates.items():
-            formatted_prompt = template.format(
-                channel_name=self.channel_name,
-                video_count=len(self.video_data)
-            )
-            
-            prompt_content = f"""# NotebookLM Analysis Prompt: {prompt_type.replace('_', ' ').title()}
+        # Create the master prompt file
+        prompt_content = f"""# Master NotebookLM Prompt: YouTube Strategy & Content Generation
 
 **Channel**: {self.channel_name}
-**Videos**: {len(self.video_data)} videos
+**Videos Analyzed**: {len(self.video_data)} videos
 **Generated**: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
-
-## 📋 Instructions:
-1. Add the video URLs from `video_urls_for_notebooklm.txt` as sources in NotebookLM
-2. Copy the prompt below and paste it into NotebookLM
-3. Review the analysis and ask follow-up questions as needed
-
-## 🎯 Analysis Prompt:
-
-{formatted_prompt}
-
-## 📊 Additional Context:
-- Total channel views: {self.format_number(sum(v.get('view_count', 0) for v in self.video_data))}
-- Average views per video: {self.format_number(sum(v.get('view_count', 0) for v in self.video_data) / len(self.video_data))}
-- Most viewed video: {max(self.video_data, key=lambda x: x.get('view_count', 0))['title']}
-- Channel's main topics: {', '.join([tag for tag, _ in Counter([tag for video in self.video_data for tag in video.get('tags', [])]).most_common(5)])}
 
 ---
 
-## 💡 Follow-up Questions to Ask NotebookLM:
-- "Can you provide specific examples from the videos to support this analysis?"
-- "What are the top 3 actionable insights I can implement immediately?"
-- "How would you prioritize these recommendations for maximum impact?"
-- "Can you create a content calendar based on these insights?"
-- "What would be the biggest mistakes to avoid based on this analysis?"
+## 📋 How to Use This Prompt:
 
+### Step 1: Add Sources to NotebookLM
+1. Open [NotebookLM](https://notebooklm.google.com)
+2. Create a new notebook
+3. Import the video URLs from `video_urls_for_notebooklm.txt` as sources
+4. Wait for NotebookLM to process all videos
+
+### Step 2: Run the Master Prompt
+1. Copy the entire prompt below (from "# Master YouTube Strategy" to the end)
+2. Paste it into NotebookLM's chat interface
+3. Let it analyze and generate your 5 video ideas
+
+### Step 3: Refine and Execute
+1. Review the 5 video ideas generated
+2. Ask follow-up questions to refine specific ideas
+3. Use the implementation roadmap to schedule your content
+4. Track results and iterate
+
+---
+
+## 📊 Channel Context:
+
+- **Total Channel Views**: {self.format_number(sum(v.get('view_count', 0) for v in self.video_data))}
+- **Average Views/Video**: {self.format_number(sum(v.get('view_count', 0) for v in self.video_data) / len(self.video_data))}
+- **Most Viewed Video**: {max(self.video_data, key=lambda x: x.get('view_count', 0))['title']}
+- **Top Content Topics**: {', '.join([tag for tag, _ in Counter([tag for video in self.video_data for tag in video.get('tags', [])]).most_common(5)])}
+
+---
+
+{formatted_prompt}
+
+---
+
+## 💡 Powerful Follow-up Questions:
+
+After NotebookLM generates your 5 video ideas, ask these to go deeper:
+
+1. **For Refinement**:
+   - "Can you make Video Idea #2's hook more controversial to increase click-through rate?"
+   - "Expand the talking points for Video Idea #1 into a full 5-minute script outline"
+   - "What thumbnail concepts would work best for Video Idea #3?"
+
+2. **For Validation**:
+   - "Which of the 5 video ideas has the highest viral potential and why?"
+   - "Are any of these ideas too similar to recent {self.channel_name} videos?"
+   - "What data from the analysis supports Video Idea #4's strategic rationale?"
+
+3. **For Scaling**:
+   - "How could Video Idea #1 be turned into a series of 5 videos?"
+   - "What would be the best publishing order for maximum audience growth?"
+   - "Create a 30-day content calendar integrating these 5 videos with other content types"
+
+4. **For Monetization**:
+   - "Which video ideas have the highest potential for sponsorship deals?"
+   - "How could these videos lead to a paid course or digital product?"
+   - "What affiliate products could naturally be promoted in each video?"
+
+---
+
+## 🎯 Why This Master Prompt Works:
+
+✅ **Eliminates Redundancy**: One prompt instead of five separate analyses
+✅ **Focuses on Action**: Directly generates 5 ready-to-produce video ideas  
+✅ **Data-Driven**: Based on actual performance patterns from {len(self.video_data)} videos
+✅ **Complete Workflow**: Analysis → Ideas → Implementation roadmap
+✅ **Immediately Actionable**: Get your first video idea within minutes
+
+---
+
+**Pro Tip**: Run this prompt weekly with different successful channels in your niche to build a content idea bank that's backed by proven data!
 """
-            
-            with open(prompts_dir / f"{prompt_type}_prompt.md", 'w', encoding='utf-8') as f:
-                f.write(prompt_content)
         
-        print(f"   ✅ Generated {len(self.prompt_templates)} AI analysis prompts + URL list\n")
+        # Save the master prompt
+        with open(self.output_dir / "MASTER_NOTEBOOKLM_PROMPT.md", 'w', encoding='utf-8') as f:
+            f.write(prompt_content)
+        
+        print("   ✅ Generated Master Prompt with full workflow + URL list\n")
+
     
     def create_master_summary(self):
         """Create a master summary and action plan."""
@@ -779,19 +748,18 @@ This CSV contains all metadata for further analysis in Excel, Google Sheets, or 
 
 ### NotebookLM Resources
 - `video_urls_for_notebooklm.txt` - All video URLs for import
-- `notebooklm_prompts/` folder with 5 specialized analysis prompts:
-  - Success Analysis Prompt
-  - Content Strategy Prompt  
-  - Monetization Analysis Prompt
-  - Competitor Analysis Prompt
-  - Viral Content Analysis Prompt
+- `MASTER_NOTEBOOKLM_PROMPT.md` - **START HERE!** One powerful prompt that:
+  - Analyzes success patterns from all videos
+  - Generates 5 ready-to-produce video ideas
+  - Provides implementation roadmap
+  - Includes follow-up questions for deeper insights
 
 ## 🚀 Next Steps
 
 ### Immediate Actions:
-1. **Review Top Performers**: Study the top 20 videos in `02_success_metrics.md`
-2. **Identify Patterns**: Look for common themes in high-performing content
-3. **NotebookLM Analysis**: Use the generated prompts for deeper insights
+1. **Start with Master Prompt**: Open `MASTER_NOTEBOOKLM_PROMPT.md` and follow the instructions
+2. **Get 5 Video Ideas**: Use NotebookLM to generate your first 5 data-backed video concepts
+3. **Review Performance Data**: Study `02_success_metrics.md` to understand what works
 
 ### Content Strategy:
 1. **Focus on Winning Topics**: Prioritize content around: {', '.join(top_tags[:3])}
@@ -850,7 +818,7 @@ This analysis provides a complete blueprint for understanding and replicating su
         print("   🏷️  03_content_themes.md - Topic and theme analysis") 
         print("   🏆 04_performance_rankings.md - Complete rankings")
         print("   📊 detailed_video_data.csv - Full dataset for Excel")
-        print("   📝 notebooklm_prompts/ - 5 specialized analysis prompts")
+        print("   📝 MASTER_NOTEBOOKLM_PROMPT.md - Get 5 video ideas instantly")
         print("   🔗 video_urls_for_notebooklm.txt - URLs for NotebookLM import")
         print()
         print("🚀 Next Steps:")
