@@ -1,17 +1,19 @@
 # 🎯 YouTube Success Analyzer
 
-**Turn Any YouTube Channel Into 5 Ready-to-Produce Video Ideas in Minutes**
+**Turn Any YouTube Channel Into 3 High-Impact Video Ideas in Minutes**
 
-Transform any YouTube channel URL into data-backed video concepts using AI-powered analysis. No more guessing what content will work—get proven strategies from successful channels.
+Transform any YouTube channel URL into niche-focused, data-backed video concepts using AI-powered analysis. No more guessing what content will work—get proven strategies from successful channels.
+
+**Optimized for NotebookLM** (500K words/source, 50 queries/day)
 
 ## 🚀 What This Tool Does
 
 **Single Input → Instant Video Ideas:**
 
 1. **📊 Analyze Success Patterns** - Extract what actually works from 100+ videos
-2. **🤖 Generate Video Ideas** - Get 5 ready-to-produce concepts backed by data
-3. **� Get Implementation Plan** - Receive a complete roadmap with titles, hooks, and talking points
-4. **� One Powerful Prompt** - No more running 5 separate analyses
+2. **🤖 Generate Video Ideas** - Get 3 niche-focused concepts backed by data
+3. **📋 Get Implementation Plan** - Receive a complete roadmap with titles, hooks, and talking points
+4. **⚡ One Optimized Prompt** - Designed for NotebookLM's limits & continuous improvement
 
 Perfect for content creators who want data-driven video ideas instead of guesswork!
 
@@ -20,14 +22,15 @@ Perfect for content creators who want data-driven video ideas instead of guesswo
 **The Old Way (Inefficient):**
 - ❌ Run 5 separate analysis prompts
 - ❌ Get overlapping, redundant insights  
-- ❌ Spend hours synthesizing data
-- ❌ Still need to manually create video ideas
+- ❌ Hit NotebookLM query limits quickly
+- ❌ Generic ideas that lack strategic focus
 
-**The New Way (Streamlined):**
-- ✅ One Master Prompt does everything
-- ✅ Directly generates 5 video ideas
-- ✅ Each idea includes title, hook, talking points, and rationale
-- ✅ Ready to produce within minutes
+**The New Way (Optimized):**
+- ✅ One Master Prompt (~400 words, well under 500K limit)
+- ✅ Generates 3 high-impact, niche-focused video ideas
+- ✅ Each idea: title, hook, talking points, data-backed rationale
+- ✅ Leaves room for 40+ follow-up refinement queries
+- ✅ Designed for continuous improvement
 
 ## 🛠️ Setup
 
@@ -65,8 +68,9 @@ Paste any YouTube channel URL from your niche:
 The tool will:
 - Extract metadata from all videos
 - Calculate performance metrics
-- Generate your Master Prompt
+- Generate your optimized Master Prompt (~400 words)
 - Create supporting analysis reports
+- Prepare URL list for NotebookLM import
 
 ### Step 4: Get Your Video Ideas
 All files are saved in `analysis/[channel_name]/[timestamp]/`:
@@ -98,25 +102,30 @@ analysis/
 
 ### The Master Prompt Delivers:
 
-**Part 1: Success Pattern Analysis**
+**Part 1: Strategic Pattern Analysis** (~150 words)
 - Content pillars & viral triggers
 - Audience insights & formatting patterns
 - Unique value proposition
-- Monetization opportunities
+- Revenue potential analysis
 
-**Part 2: 5 Ready-to-Produce Video Ideas**
+**Part 2: 3 High-Impact Video Ideas** (~200 words)
 
 Each idea includes:
 1. ✅ **Viral-Optimized Title** - Proven title formula
-2. ✅ **Compelling Hook** - First 1-2 sentences to grab attention
-3. ✅ **Key Talking Points** - 5 essential points to cover
-4. ✅ **Strategic Rationale** - Why this idea will work
+2. ✅ **Compelling Hook** - First 15 seconds for max retention
+3. ✅ **Core Talking Points** - 3-5 essential points
+4. ✅ **Strategic Rationale** - Why this works (data-backed)
 
-**Part 3: Implementation Roadmap**
-- Priority order for producing videos
-- 30-day content calendar
-- Success metrics to track
-- Iteration strategy
+**Part 3: Execution Plan** (~50 words)
+- Priority: Which idea to film first
+- Schedule: 30-day rollout
+- Metrics: KPIs to track
+- Iteration: Refinement strategy
+
+**Smart Follow-Up Questions**
+- Batch queries to maximize your 50/day limit
+- Refine, validate, scale, and monetize ideas
+- Turn 1 idea into 5-video series
 
 ## 📊 Supporting Reports
 
@@ -131,9 +140,10 @@ Beyond the Master Prompt, you also get detailed analysis reports:
 ## 💰 Real-World Applications
 
 ### Content Creators
-- **Stop Guessing**: Get 5 video ideas proven to work in your niche
+- **Stop Guessing**: Get 3 niche-focused video ideas proven to work
 - **Replicate Success**: Identify exact patterns from top performers
 - **Save Time**: Skip weeks of brainstorming—get ideas in minutes
+- **Iterate Smart**: Use remaining queries to refine & expand ideas
 - **Data-Driven**: Every idea backed by actual performance data
 
 ### Marketing Teams

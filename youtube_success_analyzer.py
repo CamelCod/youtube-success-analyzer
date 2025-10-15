@@ -39,82 +39,54 @@ class YouTubeSuccessAnalyzer:
         self.output_dir = Path(".")  # Initialize with current directory
         self.video_data = []
         
-        # Master Prompt Template - Consolidated approach for efficiency
+        # Master Prompt Template - Optimized for NotebookLM (500K word limit, 50 queries/day)
         self.master_prompt_template = """
-# Master YouTube Strategy & Content Generation Prompt
+# Master YouTube Strategy & Video Idea Generator
 
-**Source Analysis**: {video_count} videos from the {channel_name} channel.
+**Analysis**: {video_count} videos from {channel_name}
 
-## Part 1: Unified Success Pattern Analysis
+## Part 1: Strategic Pattern Analysis
 
-Analyze the provided video sources to identify the core components of {channel_name}'s success. Focus only on patterns observable from public data (titles, transcripts, topics, view counts, etc.).
+Identify {channel_name}'s core success components from observable data (titles, topics, views, engagement).
 
-### Content Pillars & Viral Triggers
-- What are the 3-5 main content themes?
-- Which specific topics or formats consistently outperform the channel's average view count?
-- What common elements (e.g., pacing, specific keywords, high-stakes titles) do the top 10% of videos share?
-- What title patterns and hooks appear most frequently in high-performing videos?
+### Success DNA
+- **Content Pillars**: What 3 main themes dominate? Which topics outperform average views by 2x+?
+- **Viral Formula**: What title patterns, keywords, and hooks appear in top 10% videos?
+- **Audience Profile**: Who watches? What video length + format gets highest engagement?
+- **Unique Edge**: What makes this content un-copyable? What gap do they own?
 
-### Audience & Formatting  
-- Based on the language and topics, who is the target audience?
-- What is the most common video length, and how does it correlate with performance?
-- How do their titles work to hook the viewer immediately?
-- What content formats (tutorials, news, commentary, etc.) perform best?
-
-### Unique Value Proposition
-- What makes their content difficult for a competitor to copy?
-- What market gap are they filling better than anyone else?
-- What unique angles, expertise, or presentation style sets them apart?
-- How do they differentiate from similar channels in their niche?
-
-### Monetization Potential  
-- Which video topics demonstrate a high level of expertise that would build trust for a paid product?
-- What content could naturally lead to courses, consulting, or premium offerings?
-- Which videos show strong audience loyalty and engagement that indicates monetization potential?
+### Revenue Potential
+- Which topics show expertise that could support paid products/courses?
+- What content demonstrates audience loyalty for monetization?
 
 ---
 
-## Part 2: Actionable Content Generation
+## Part 2: Generate 3 High-Impact Video Ideas
 
-Based on your entire analysis in Part 1, your primary task is to **generate 5 distinct video ideas** that replicate the success patterns you identified.
-
-For **each** of the 5 video ideas, provide the following four elements:
+Create **3 distinct, niche-focused video concepts** using the patterns above. Each must include:
 
 ### Video Idea #1
-1. **Viral-Optimized Title**: [Create a title that follows {channel_name}'s successful formula]
-2. **Compelling Hook**: [Write the first 1-2 sentences of the video script to grab immediate attention]
-3. **Key Talking Points**: 
-   - [Essential point 1]
-   - [Essential point 2]
-   - [Essential point 3]
-   - [Essential point 4]
-   - [Essential point 5]
-4. **Strategic Rationale**: [In one sentence, explain WHY this video idea is strong based on your analysis]
+1. **Title**: [Viral-optimized using {channel_name}'s proven formula]
+2. **Hook**: [Opening 15 seconds - max retention focus]
+3. **Core Points**: [3-5 essential talking points]
+4. **Why This Works**: [One-sentence rationale tied to data]
 
 ### Video Idea #2
-[Repeat the same 4-element structure]
+[Same structure - different niche angle]
 
 ### Video Idea #3
-[Repeat the same 4-element structure]
-
-### Video Idea #4
-[Repeat the same 4-element structure]
-
-### Video Idea #5
-[Repeat the same 4-element structure]
+[Same structure - unique strategic position]
 
 ---
 
-## Part 3: Implementation Roadmap
+## Part 3: Execution Plan
 
-Provide a prioritized action plan:
+1. **Priority**: Which idea to film first and why?
+2. **Schedule**: 30-day rollout strategy
+3. **Metrics**: Key performance indicators to track
+4. **Iteration**: How to refine based on results
 
-1. **Immediate Actions** (This Week): Which of the 5 video ideas should be created first and why?
-2. **Content Calendar** (Next 30 Days): Suggest an optimal posting schedule for the 5 videos
-3. **Success Metrics**: What metrics should be tracked to validate these strategies?
-4. **Iteration Strategy**: How should the approach be refined based on initial performance?
-
-Focus on creating video ideas that are immediately actionable and backed by data-driven insights from {channel_name}'s success patterns.
+**Focus**: Each idea must be immediately actionable, data-backed, and designed for continuous improvement through follow-up analysis.
 """
     
     
@@ -247,11 +219,11 @@ Focus on creating video ideas that are immediately actionable and backed by data
             'writesubtitles': False,
             'writeautomaticsub': False,
             'ignoreerrors': True,
-            'cookielessapi': True,
+            'cookiesfrombrowser': ('chrome',),  # Extract cookies from Chrome to handle age-restricted videos
             'proxy': '',
-            'sleep_interval': 1,  # Sleep 1 second between requests
-            'max_sleep_interval': 3,  # Max 3 seconds sleep
-            'sleep_interval_requests': 1,  # Sleep between API requests
+            'sleep_interval': 3,  # Sleep 3 seconds between requests
+            'max_sleep_interval': 5,  # Max 5 seconds sleep
+            'sleep_interval_requests': 2,  # Sleep 2 seconds between API requests
         }
         
         try:
@@ -631,28 +603,25 @@ This CSV contains all metadata for further analysis in Excel, Google Sheets, or 
 ### Step 1: Add Sources to NotebookLM
 1. Open [NotebookLM](https://notebooklm.google.com)
 2. Create a new notebook
-3. Import the video URLs from `video_urls_for_notebooklm.txt` as sources
-4. Wait for NotebookLM to process all videos
+3. Import video URLs from `video_urls_for_notebooklm.txt`
+4. Wait for processing (under 500K word limit per source)
 
 ### Step 2: Run the Master Prompt
-1. Copy the entire prompt below (from "# Master YouTube Strategy" to the end)
-2. Paste it into NotebookLM's chat interface
-3. Let it analyze and generate your 5 video ideas
+1. Copy the prompt below (starts with "# Master YouTube Strategy")
+2. Paste into NotebookLM chat
+3. Get 3 high-impact video ideas
 
-### Step 3: Refine and Execute
-1. Review the 5 video ideas generated
-2. Ask follow-up questions to refine specific ideas
-3. Use the implementation roadmap to schedule your content
-4. Track results and iterate
+### Step 3: Iterate & Refine
+Use follow-up questions to deepen analysis (50 queries/day on free tier)
 
 ---
 
 ## 📊 Channel Context:
 
-- **Total Channel Views**: {self.format_number(sum(v.get('view_count', 0) for v in self.video_data))}
-- **Average Views/Video**: {self.format_number(sum(v.get('view_count', 0) for v in self.video_data) / len(self.video_data))}
-- **Most Viewed Video**: {max(self.video_data, key=lambda x: x.get('view_count', 0))['title']}
-- **Top Content Topics**: {', '.join([tag for tag, _ in Counter([tag for video in self.video_data for tag in video.get('tags', [])]).most_common(5)])}
+- **Total Views**: {self.format_number(sum(v.get('view_count', 0) for v in self.video_data))}
+- **Avg Views/Video**: {self.format_number(sum(v.get('view_count', 0) for v in self.video_data) / len(self.video_data))}
+- **Top Video**: {max(self.video_data, key=lambda x: x.get('view_count', 0))['title']}
+- **Key Topics**: {', '.join([tag for tag, _ in Counter([tag for video in self.video_data for tag in video.get('tags', [])]).most_common(5)])}
 
 ---
 
@@ -660,43 +629,37 @@ This CSV contains all metadata for further analysis in Excel, Google Sheets, or 
 
 ---
 
-## 💡 Powerful Follow-up Questions:
+## 💡 Smart Follow-Up Questions (Maximize Your 50 Daily Queries):
 
-After NotebookLM generates your 5 video ideas, ask these to go deeper:
+**Refine Ideas**:
+- "Expand Video Idea #2 into a full script outline with timestamps"
+- "Make the hook for Idea #1 more controversial for higher CTR"
+- "Generate 3 thumbnail concepts for Idea #3"
 
-1. **For Refinement**:
-   - "Can you make Video Idea #2's hook more controversial to increase click-through rate?"
-   - "Expand the talking points for Video Idea #1 into a full 5-minute script outline"
-   - "What thumbnail concepts would work best for Video Idea #3?"
+**Validate Strategy**:
+- "Which idea has highest viral potential based on the data?"
+- "Are these ideas different enough from recent {self.channel_name} content?"
+- "What specific metrics support Idea #2's rationale?"
 
-2. **For Validation**:
-   - "Which of the 5 video ideas has the highest viral potential and why?"
-   - "Are any of these ideas too similar to recent {self.channel_name} videos?"
-   - "What data from the analysis supports Video Idea #4's strategic rationale?"
-
-3. **For Scaling**:
-   - "How could Video Idea #1 be turned into a series of 5 videos?"
-   - "What would be the best publishing order for maximum audience growth?"
-   - "Create a 30-day content calendar integrating these 5 videos with other content types"
-
-4. **For Monetization**:
-   - "Which video ideas have the highest potential for sponsorship deals?"
-   - "How could these videos lead to a paid course or digital product?"
-   - "What affiliate products could naturally be promoted in each video?"
+**Scale & Monetize**:
+- "Turn Idea #1 into a 5-video series"
+- "Create a 90-day content calendar using these patterns"
+- "What products/sponsorships fit each idea?"
+- "Which idea best supports a paid course launch?"
 
 ---
 
-## 🎯 Why This Master Prompt Works:
+## 🎯 Why This Works:
 
-✅ **Eliminates Redundancy**: One prompt instead of five separate analyses
-✅ **Focuses on Action**: Directly generates 5 ready-to-produce video ideas  
-✅ **Data-Driven**: Based on actual performance patterns from {len(self.video_data)} videos
-✅ **Complete Workflow**: Analysis → Ideas → Implementation roadmap
-✅ **Immediately Actionable**: Get your first video idea within minutes
+✅ **Optimized for NotebookLM**: Stays under word limits, maximizes daily query value
+✅ **3 > 5**: Fewer, deeper, more strategic ideas = higher engagement
+✅ **Niche-Focused**: Each idea targets specific audience segment
+✅ **Iteration-Ready**: Designed for continuous refinement via follow-ups
+✅ **Data-Driven**: Every idea backed by {len(self.video_data)} video analysis
 
 ---
 
-**Pro Tip**: Run this prompt weekly with different successful channels in your niche to build a content idea bank that's backed by proven data!
+**Pro Tip**: Save 10+ queries by batching related questions. Example: "For Idea #1, provide: script outline, 3 thumbnail concepts, and best posting time."
 """
         
         # Save the master prompt
