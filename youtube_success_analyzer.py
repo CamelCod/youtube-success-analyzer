@@ -213,17 +213,17 @@ Create **3 distinct, niche-focused video concepts** using the patterns above. Ea
         ydl_opts = {
             'quiet': True,
             'no_warnings': True,
-            'extract_flat': False,
+            'extract_flat': 'in_playlist',  # Fast: get basic info first, then fetch details only for videos we process
             'writeinfojson': False,
             'writethumbnail': False,
             'writesubtitles': False,
             'writeautomaticsub': False,
             'ignoreerrors': True,
-            'cookiesfrombrowser': ('chrome',),  # Extract cookies from Chrome to handle age-restricted videos
-            'proxy': '',
-            'sleep_interval': 3,  # Sleep 3 seconds between requests
-            'max_sleep_interval': 5,  # Max 5 seconds sleep
-            'sleep_interval_requests': 2,  # Sleep 2 seconds between API requests
+            'no_check_certificate': True,
+            'extractor_args': {'youtube': {'player_client': ['ios', 'web']}},  # Use multiple clients for reliability
+            'sleep_interval': 1,  # Reduced to 1 second - still safe but much faster
+            'max_sleep_interval': 2,  # Max 2 seconds
+            'sleep_interval_requests': 1,  # 1 second between API requests
         }
         
         try:
@@ -234,12 +234,14 @@ Create **3 distinct, niche-focused video concepts** using the patterns above. Ea
                     total_videos = len([v for v in channel_dict['entries'] if v])
                     print(f"   📊 Found {total_videos} videos - extracting success metrics...\n")
                     
+                    # Show progress every 10 videos for better feedback
                     for i, video in enumerate(channel_dict['entries'], 1):
                         if video:
                             try:
-                                if i % 20 == 0:
+                                # Progress updates every 10 videos instead of 20
+                                if i % 10 == 0 or i == 1:
                                     percent = (i / total_videos) * 100
-                                    print(f"   ⚡ Progress: {i}/{total_videos} ({percent:.0f}%) - Analyzing views, engagement & content patterns...")
+                                    print(f"   ⚡ Progress: {i}/{total_videos} ({percent:.0f}%) - Processing video data...")
                                 elif i == total_videos:
                                     print(f"   ✅ Complete: {i}/{total_videos} (100%) - Success data extracted!\n")
                                 
