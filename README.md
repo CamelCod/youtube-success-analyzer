@@ -10,10 +10,12 @@ Transform any YouTube channel URL into niche-focused, data-backed video concepts
 
 **Single Input → Instant Video Ideas:**
 
-1. **📊 Analyze Success Patterns** - Extract what actually works from 100+ videos
+1. **📊 Analyze Success Patterns** - Extract what actually works from top 30% of videos
 2. **🤖 Generate Video Ideas** - Get 3 niche-focused concepts backed by data
 3. **📋 Get Implementation Plan** - Receive a complete roadmap with titles, hooks, and talking points
 4. **⚡ One Optimized Prompt** - Designed for NotebookLM's limits & continuous improvement
+
+**⚡ Smart Optimization:** Only analyzes top 30% of videos = **70% faster** while focusing on what actually works!
 
 Perfect for content creators who want data-driven video ideas instead of guesswork!
 
