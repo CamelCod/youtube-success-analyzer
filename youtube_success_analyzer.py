@@ -299,35 +299,36 @@ Create **3 distinct, niche-focused video concepts** using the patterns above. Ea
                                 'categories': video.get('categories', []),
                                 'thumbnail': video.get('thumbnail', ''),
                             }
-                                
-                                # Format data
-                                if metadata['duration']:
-                                    duration_str = f"{metadata['duration'] // 3600:02d}:{(metadata['duration'] % 3600) // 60:02d}:{metadata['duration'] % 60:02d}"
-                                    metadata['duration_formatted'] = duration_str
-                                else:
-                                    metadata['duration_formatted'] = "Unknown"
-                                
-                                if metadata['upload_date']:
-                                    try:
-                                        date_obj = datetime.strptime(metadata['upload_date'], '%Y%m%d')
-                                        metadata['upload_date_formatted'] = date_obj.strftime('%Y-%m-%d')
-                                    except ValueError:
-                                        metadata['upload_date_formatted'] = metadata['upload_date']
-                                else:
-                                    metadata['upload_date_formatted'] = "Unknown"
-                                
-                                metadata['view_count_formatted'] = self.format_number(metadata['view_count'])
-                                metadata['like_count_formatted'] = self.format_number(metadata['like_count'])
-                                metadata['comment_count_formatted'] = self.format_number(metadata['comment_count'])
-                                
-                                # Calculate engagement metrics
-                                views = metadata['view_count']
-                                likes = metadata['like_count']
-                                comments = metadata['comment_count']
-                                
-                                if views > 0:
-                                    metadata['engagement_rate'] = round(((likes + comments) / views) * 100, 2)
-                                    metadata['like_rate'] = round((likes / views) * 100, 2)
+                            
+                            # Format data
+                            if metadata['duration']:
+                                duration = int(metadata['duration'])
+                                duration_str = f"{duration // 3600:02d}:{(duration % 3600) // 60:02d}:{duration % 60:02d}"
+                                metadata['duration_formatted'] = duration_str
+                            else:
+                                metadata['duration_formatted'] = "Unknown"
+                            
+                            if metadata['upload_date']:
+                                try:
+                                    date_obj = datetime.strptime(metadata['upload_date'], '%Y%m%d')
+                                    metadata['upload_date_formatted'] = date_obj.strftime('%Y-%m-%d')
+                                except ValueError:
+                                    metadata['upload_date_formatted'] = metadata['upload_date']
+                            else:
+                                metadata['upload_date_formatted'] = "Unknown"
+                            
+                            metadata['view_count_formatted'] = self.format_number(metadata['view_count'])
+                            metadata['like_count_formatted'] = self.format_number(metadata['like_count'])
+                            metadata['comment_count_formatted'] = self.format_number(metadata['comment_count'])
+                            
+                            # Calculate engagement metrics
+                            views = metadata['view_count']
+                            likes = metadata['like_count']
+                            comments = metadata['comment_count']
+                            
+                            if views > 0:
+                                metadata['engagement_rate'] = round(((likes + comments) / views) * 100, 2)
+                                metadata['like_rate'] = round((likes / views) * 100, 2)
                                 metadata['comment_rate'] = round((comments / views) * 100, 2)
                             else:
                                 metadata['engagement_rate'] = 0
@@ -343,7 +344,9 @@ Create **3 distinct, niche-focused video concepts** using the patterns above. Ea
                     print(f"\n   ✅ Successfully analyzed {len(self.video_data)} top-performing videos")
                     print(f"   💡 Focused on top 30% = {len(self.video_data)}/{total_videos} videos analyzed")
                     print(f"   🚀 Speed improvement: {100 - int((len(self.video_data)/total_videos)*100)}% faster than full scan!\n")
-                    return True        except Exception as e:
+                    return True
+                    
+        except Exception as e:
             print(f"❌ Error extracting metadata: {e}")
             return False
     
