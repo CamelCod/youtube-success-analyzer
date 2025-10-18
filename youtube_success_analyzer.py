@@ -220,6 +220,8 @@ Create **3 distinct, niche-focused video concepts** using the patterns above. Ea
             'writeautomaticsub': False,
             'ignoreerrors': True,
             'no_check_certificate': True,
+            'proxy': '',  # Explicitly disable proxy
+            'socket_timeout': 30,  # Add timeout to prevent hangs
             'extractor_args': {'youtube': {'player_client': ['ios', 'web']}},  # Use multiple clients for reliability
             'sleep_interval': 1,  # Reduced to 1 second - still safe but much faster
             'max_sleep_interval': 2,  # Max 2 seconds
